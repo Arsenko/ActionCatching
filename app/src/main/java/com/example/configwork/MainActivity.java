@@ -2,15 +2,20 @@ package com.example.configwork;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    List<ContentList> adapterList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,11 +28,20 @@ public class MainActivity extends AppCompatActivity {
     private void init(){
         ListView listView=findViewById(R.id.listView);
 
-        List<ContentList> adapterList=prepareData();
+        List<ContentList> adapterList =prepareData();
 
         ContentAdapter adapter=new ContentAdapter(this,adapterList);
 
         listView.setAdapter(adapter);
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView temp=view.findViewById(R.id.heading);
+                Toast.makeText(MainActivity.this,temp.getText().toString(),Toast.LENGTH_LONG).show();
+                return false;
+            }
+        });
     }
 
     private ArrayList<ContentList> prepareData(){

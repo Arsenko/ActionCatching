@@ -52,12 +52,10 @@ public class ContentAdapter extends BaseAdapter {
         ImageView image=view.findViewById(R.id.itemImage);
         TextView heading=view.findViewById(R.id.heading);
         TextView body=view.findViewById(R.id.body);
-        CheckBox itemCheck=view.findViewById(R.id.itemCheck);
 
         image.setImageDrawable(contentList.getItemImage());
         heading.setText(contentList.getHeading());
         body.setText(contentList.getBody());
-        itemCheck.setChecked(contentList.getItemCheck());
 
         return view;
     }
