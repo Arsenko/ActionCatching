@@ -26,29 +26,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init(){
-        ListView listView=findViewById(R.id.listView);
+        final ListView listView=findViewById(R.id.listView);
 
         List<ContentList> adapterList =prepareData();
 
-        ContentAdapter adapter=new ContentAdapter(this,adapterList);
+        final ContentAdapter adapter=new ContentAdapter(this,adapterList);
 
         listView.setAdapter(adapter);
-
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView temp=view.findViewById(R.id.heading);
-                Toast.makeText(MainActivity.this,temp.getText().toString(),Toast.LENGTH_LONG).show();
-                return false;
-            }
-        });
     }
 
     private ArrayList<ContentList> prepareData(){
         ArrayList<ContentList> conList=new ArrayList<>();
         String[] headingString= getResources().getStringArray(R.array.headings);
         for(int i=0;i<headingString.length;i++){
-            conList.add(new ContentList(getDrawable(R.drawable.ic_launcher_foreground),headingString[i],"project",false));
+            conList.add(new ContentList(getDrawable(R.drawable.ic_launcher_foreground),
+                    headingString[i],"project",false));
         }
         return conList;
     }

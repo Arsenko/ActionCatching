@@ -1,6 +1,7 @@
 package com.example.configwork;
 
 import android.graphics.drawable.Drawable;
+import android.view.View;
 import android.widget.CheckBox;
 
 public class ContentList {
