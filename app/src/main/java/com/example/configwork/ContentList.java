@@ -1,20 +1,16 @@
 package com.example.configwork;
 
 import android.graphics.drawable.Drawable;
-import android.view.View;
-import android.widget.CheckBox;
 
 public class ContentList {
     private Drawable itemImage;
     private String heading;
     private String body;
-    private boolean itemCheck;
 
-    public ContentList(Drawable itemImage,String heading,String body,boolean itemCheck){
-        this.itemImage=itemImage;
-        this.heading=heading;
-        this.body=body;
-        this.itemCheck=itemCheck;
+    public ContentList(Drawable itemImage, String heading, String body) {
+        this.itemImage = itemImage;
+        this.heading = heading;
+        this.body = body;
     }
 
     public Drawable getItemImage() {
@@ -29,7 +25,4 @@ public class ContentList {
         return body;
     }
 
-    public boolean getItemCheck() {
-        return itemCheck;
-    }
 }

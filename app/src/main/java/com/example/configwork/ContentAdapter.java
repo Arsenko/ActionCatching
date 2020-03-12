@@ -1,21 +1,17 @@
 package com.example.configwork;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
-public class ContentAdapter extends BaseAdapter implements OnLongClick,OnClick {
+public class ContentAdapter extends BaseAdapter {
     List<ContentList> items;
     LayoutInflater inflaiter;
     Context context;
@@ -54,37 +50,10 @@ public class ContentAdapter extends BaseAdapter implements OnLongClick,OnClick {
         ImageView image=view.findViewById(R.id.itemImage);
         TextView heading=view.findViewById(R.id.heading);
         TextView body=view.findViewById(R.id.body);
-        Button btnDelete=view.findViewById(R.id.btnDelete);
-
-        final int pos=position;
-        btnDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                OnClick(pos);
-            }
-        });
-        btnDelete.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                OnLongClick(items.get(pos).getHeading(),parent);
-                return false;
-            }
-        });
         image.setImageDrawable(contentList.getItemImage());
         heading.setText(contentList.getHeading());
         body.setText(contentList.getBody());
 
         return view;
-    }
-
-    @Override
-    public void OnClick(int position) {
-        items.remove(position);
-        this.notifyDataSetChanged();
-    }
-
-    @Override
-    public void OnLongClick(String title, ViewGroup parent) {
-        Toast.makeText(parent.getContext(),title,Toast.LENGTH_LONG).show();
     }
 }

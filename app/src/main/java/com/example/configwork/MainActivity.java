@@ -1,20 +1,16 @@
 package com.example.configwork;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
     List<ContentList> adapterList;
 
     @Override
@@ -26,13 +22,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init(){
-        final ListView listView=findViewById(R.id.listView);
+        ListView listView=findViewById(R.id.listView);
 
-        List<ContentList> adapterList =prepareData();
+        adapterList =prepareData();
 
         final ContentAdapter adapter=new ContentAdapter(this,adapterList);
 
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                adapterList.remove(position);
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(view.getContext(),adapterList.get(position).getHeading(),Toast.LENGTH_LONG).show();
+                return true;
+            }
+        });
     }
 
     private ArrayList<ContentList> prepareData(){
@@ -40,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         String[] headingString= getResources().getStringArray(R.array.headings);
         for(int i=0;i<headingString.length;i++){
             conList.add(new ContentList(getDrawable(R.drawable.ic_launcher_foreground),
-                    headingString[i],"project",false));
+                    headingString[i],"project"));
         }
         return conList;
     }
